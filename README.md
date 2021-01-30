@@ -10,13 +10,28 @@ Most modern multiple object tracking (MOT) systems follow the tracking-by-detect
 
 ## Installation
 * Clone this repo, and run the following commands.
-* Install dependencies. We use python 3.7 and pytorch >= 1.2.0
+* create a new conda environment and activate the environment.
 ```
 git clone git@github.com:MedChaabane/DEFT.git
 cd DEFT
 conda create -y -n DEFT python=3.7
 conda activate DEFT
+```
+* Install PyTorch and the dependencies.
+```
 conda install -y pytorch==1.2.0 torchvision==0.4.0 cudatoolkit=10.0 -c pytorch
 pip install -r requirements.txt  
 ```
+* Install [COCOAPI](https://github.com/cocodataset/cocoapi):
+```
+pip install cython; pip install -U 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
+```
+* Compile [DCNv2](https://github.com/CharlesShang/DCNv2)
+```
+cd src/lib/model/networks/
+git clone https://github.com/CharlesShang/DCNv2
+cd DCNv2
+./make.sh
+```
+* Download the [pretrained models](https://drive.google.com/drive/folders/1dlVoV-4fMYlttdj2ba0unn6WX-nxaC48?usp=sharing) and move them to src/models/ . 
 
