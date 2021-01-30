@@ -88,4 +88,3 @@ dependencies:
   - pytorch=1.2.0=py3.6_cuda10.0.130_cudnn7.6.2_0
   - torchvision=0.4.0=py36_cu100
 prefix: /s/red/a/nobackup/vision/chaabane/tracker/DEFT/anaconda/anaconda3/envs/DEFT
-

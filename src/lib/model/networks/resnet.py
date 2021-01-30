@@ -19,17 +19,19 @@ from .base_model import BaseModel
 BN_MOMENTUM = 0.1
 
 model_urls = {
-    'resnet18': 'https://download.pytorch.org/models/resnet18-5c106cde.pth',
-    'resnet34': 'https://download.pytorch.org/models/resnet34-333f7ec4.pth',
-    'resnet50': 'https://download.pytorch.org/models/resnet50-19c8e357.pth',
-    'resnet101': 'https://download.pytorch.org/models/resnet101-5d3b4d8f.pth',
-    'resnet152': 'https://download.pytorch.org/models/resnet152-b121ed2d.pth',
+    "resnet18": "https://download.pytorch.org/models/resnet18-5c106cde.pth",
+    "resnet34": "https://download.pytorch.org/models/resnet34-333f7ec4.pth",
+    "resnet50": "https://download.pytorch.org/models/resnet50-19c8e357.pth",
+    "resnet101": "https://download.pytorch.org/models/resnet101-5d3b4d8f.pth",
+    "resnet152": "https://download.pytorch.org/models/resnet152-b121ed2d.pth",
 }
+
 
 def conv3x3(in_planes, out_planes, stride=1):
     """3x3 convolution with padding"""
-    return nn.Conv2d(in_planes, out_planes, kernel_size=3, stride=stride,
-                     padding=1, bias=False)
+    return nn.Conv2d(
+        in_planes, out_planes, kernel_size=3, stride=stride, padding=1, bias=False
+    )
 
 
 class BasicBlock(nn.Module):
@@ -71,13 +73,14 @@ class Bottleneck(nn.Module):
         super(Bottleneck, self).__init__()
         self.conv1 = nn.Conv2d(inplanes, planes, kernel_size=1, bias=False)
         self.bn1 = nn.BatchNorm2d(planes, momentum=BN_MOMENTUM)
-        self.conv2 = nn.Conv2d(planes, planes, kernel_size=3, stride=stride,
-                               padding=1, bias=False)
+        self.conv2 = nn.Conv2d(
+            planes, planes, kernel_size=3, stride=stride, padding=1, bias=False
+        )
         self.bn2 = nn.BatchNorm2d(planes, momentum=BN_MOMENTUM)
-        self.conv3 = nn.Conv2d(planes, planes * self.expansion, kernel_size=1,
-                               bias=False)
-        self.bn3 = nn.BatchNorm2d(planes * self.expansion,
-                                  momentum=BN_MOMENTUM)
+        self.conv3 = nn.Conv2d(
+            planes, planes * self.expansion, kernel_size=1, bias=False
+        )
+        self.bn3 = nn.BatchNorm2d(planes * self.expansion, momentum=BN_MOMENTUM)
         self.relu = nn.ReLU(inplace=True)
         self.downsample = downsample
         self.stride = stride
@@ -104,14 +107,17 @@ class Bottleneck(nn.Module):
 
         return out
 
-resnet_spec = {18: (BasicBlock, [2, 2, 2, 2]),
-               34: (BasicBlock, [3, 4, 6, 3]),
-               50: (Bottleneck, [3, 4, 6, 3]),
-               101: (Bottleneck, [3, 4, 23, 3]),
-               152: (Bottleneck, [3, 8, 36, 3])}
+
+resnet_spec = {
+    18: (BasicBlock, [2, 2, 2, 2]),
+    34: (BasicBlock, [3, 4, 6, 3]),
+    50: (Bottleneck, [3, 4, 6, 3]),
+    101: (Bottleneck, [3, 4, 23, 3]),
+    152: (Bottleneck, [3, 8, 36, 3]),
+}
+
 
 class PoseResNet(nn.Module):
-
     def __init__(self, num_layers, heads, head_convs, _):
         super(PoseResNet, self).__init__(heads, head_convs, 1, 64)
         block, layers = resnet_spec[num_layers]
@@ -120,8 +126,7 @@ class PoseResNet(nn.Module):
         self.heads = heads
 
         super(PoseResNet, self).__init__()
-        self.conv1 = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3,
-                               bias=False)
+        self.conv1 = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3, bias=False)
         self.bn1 = nn.BatchNorm2d(64, momentum=BN_MOMENTUM)
         self.relu = nn.ReLU(inplace=True)
         self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
@@ -131,11 +136,7 @@ class PoseResNet(nn.Module):
         self.layer4 = self._make_layer(block, 512, layers[3], stride=2)
 
         # used for deconv layers
-        self.deconv_layers = self._make_deconv_layer(
-            3,
-            [256, 256, 256],
-            [4, 4, 4],
-        )
+        self.deconv_layers = self._make_deconv_layer(3, [256, 256, 256], [4, 4, 4])
 
         self.init_weights(num_layers, pretrained=True)
 
@@ -157,8 +158,13 @@ class PoseResNet(nn.Module):
         downsample = None
         if stride != 1 or self.inplanes != planes * block.expansion:
             downsample = nn.Sequential(
-                nn.Conv2d(self.inplanes, planes * block.expansion,
-                          kernel_size=1, stride=stride, bias=False),
+                nn.Conv2d(
+                    self.inplanes,
+                    planes * block.expansion,
+                    kernel_size=1,
+                    stride=stride,
+                    bias=False,
+                ),
                 nn.BatchNorm2d(planes * block.expansion, momentum=BN_MOMENTUM),
             )
 
@@ -184,15 +190,16 @@ class PoseResNet(nn.Module):
         return deconv_kernel, padding, output_padding
 
     def _make_deconv_layer(self, num_layers, num_filters, num_kernels):
-        assert num_layers == len(num_filters), \
-            'ERROR: num_deconv_layers is different len(num_deconv_filters)'
-        assert num_layers == len(num_kernels), \
-            'ERROR: num_deconv_layers is different len(num_deconv_filters)'
+        assert num_layers == len(
+            num_filters
+        ), "ERROR: num_deconv_layers is different len(num_deconv_filters)"
+        assert num_layers == len(
+            num_kernels
+        ), "ERROR: num_deconv_layers is different len(num_deconv_filters)"
 
         layers = []
         for i in range(num_layers):
-            kernel, padding, output_padding = \
-                self._get_deconv_cfg(num_kernels[i], i)
+            kernel, padding, output_padding = self._get_deconv_cfg(num_kernels[i], i)
 
             planes = num_filters[i]
             layers.append(
@@ -203,7 +210,9 @@ class PoseResNet(nn.Module):
                     stride=2,
                     padding=padding,
                     output_padding=output_padding,
-                    bias=self.deconv_with_bias))
+                    bias=self.deconv_with_bias,
+                )
+            )
             layers.append(nn.BatchNorm2d(planes, momentum=BN_MOMENTUM))
             layers.append(nn.ReLU(inplace=True))
             self.inplanes = planes
@@ -227,26 +236,24 @@ class PoseResNet(nn.Module):
                     nn.init.constant_(m.bias, 0)
             # print('=> init final conv weights from normal distribution')
             for head in self.heads:
-              final_layer = self.__getattr__(head)
-              for i, m in enumerate(final_layer.modules()):
-                  if isinstance(m, nn.Conv2d):
-                      # nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
-                      # print('=> init {}.weight as normal(0, 0.001)'.format(name))
-                      # print('=> init {}.bias as 0'.format(name))
-                      if m.weight.shape[0] == self.heads[head]:
-                          if 'hm' in head:
-                              nn.init.constant_(m.bias, -2.19)
-                          else:
-                              nn.init.normal_(m.weight, std=0.001)
-                              nn.init.constant_(m.bias, 0)
-            #pretrained_state_dict = torch.load(pretrained)
-            url = model_urls['resnet{}'.format(num_layers)]
+                final_layer = self.__getattr__(head)
+                for i, m in enumerate(final_layer.modules()):
+                    if isinstance(m, nn.Conv2d):
+                        # nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
+                        # print('=> init {}.weight as normal(0, 0.001)'.format(name))
+                        # print('=> init {}.bias as 0'.format(name))
+                        if m.weight.shape[0] == self.heads[head]:
+                            if "hm" in head:
+                                nn.init.constant_(m.bias, -2.19)
+                            else:
+                                nn.init.normal_(m.weight, std=0.001)
+                                nn.init.constant_(m.bias, 0)
+            # pretrained_state_dict = torch.load(pretrained)
+            url = model_urls["resnet{}".format(num_layers)]
             pretrained_state_dict = model_zoo.load_url(url)
-            print('=> loading pretrained model {}'.format(url))
+            print("=> loading pretrained model {}".format(url))
             self.load_state_dict(pretrained_state_dict, strict=False)
         else:
-            print('=> imagenet pretrained model dose not exist')
-            print('=> please download it first')
-            raise ValueError('imagenet pretrained model does not exist')
-
-
+            print("=> imagenet pretrained model dose not exist")
+            print("=> please download it first")
+            raise ValueError("imagenet pretrained model does not exist")
