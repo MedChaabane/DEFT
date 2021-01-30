@@ -73,7 +73,6 @@ def main(opt):
     loss_function = torch.nn.SmoothL1Loss()
 
     for i, param in enumerate(model.parameters()):
-        print("param ", i)
         param.requires_grad = True
 
     train_loader = torch.utils.data.DataLoader(
