@@ -60,3 +60,149 @@ Tthe results are obtained on the [KITTI challenge](http://www.cvlibs.net/dataset
 
 Tthe results are obtained on the [nuSCenes challenge](https://www.nuscenes.org/tracking?externalData=no&mapData=no&modalities=Camera) evaluation server.
 
+## Datsets Preparation
+We use similar datasets preparation like in [CenterTrack framework](https://github.com/xingyizhou/CenterTrack/)
+###  MOT 2017 
+- Run the dataset preprocessing script.
+```
+cd src/tools/
+sh get_mot_17.sh
+```
+- The output data structure should be:
+```
+  ${DEFT_ROOT}
+  |-- data
+  `-- |-- mot17
+      `-- |--- train
+          |   |--- MOT17-02-FRCNN
+          |   |    |--- img1
+          |   |    |--- gt
+          |   |    |   |--- gt.txt
+          |   |    |   |--- gt_train_half.txt
+          |   |    |   |--- gt_val_half.txt
+          |   |    |--- det
+          |   |    |   |--- det.txt
+          |   |    |   |--- det_train_half.txt
+          |   |    |   |--- det_val_half.txt
+          |   |--- ...
+          |--- test
+          |   |--- MOT17-01-FRCNN
+          |---|--- ...
+          `---| annotations
+              |--- train_half.json
+              |--- val_half.json
+              |--- train.json
+              `--- test.json
+```
+  ###  KITTI Tracking
+- Download [images](http://www.cvlibs.net/download.php?file=data_tracking_image_2.zip), [annotations](http://www.cvlibs.net/download.php?file=data_tracking_label_2.zip), and [calibration information](http://www.cvlibs.net/download.php?file=data_tracking_calib.zip) from [KITTI Tracking website](http://www.cvlibs.net/datasets/kitti/eval_tracking.php) and unzip. Place or symlink the data as below:
+  
+```
+  ${DEFT_ROOT}
+  |-- data
+  `-- |-- kitti_tracking
+      `-- |-- data_tracking_image_2
+          |   |-- training
+          |   |-- |-- image_02
+          |   |-- |-- |-- 0000
+          |   |-- |-- |-- ...
+          |-- |-- testing
+          |-- label_02
+          |   |-- 0000.txt
+          |   |-- ...
+          `-- data_tracking_calib
+```
+  
+- Run the dataset preprocessing script.
+```
+cd src/tools/
+sh get_kitti_tracking.sh
+```
+
+- The resulting data structure should look like:
+
+```
+  ${DEFT_ROOT}
+  |-- data
+  `-- |-- kitti_tracking
+      `-- |-- data_tracking_image_2
+          |   |-- training
+          |   |   |-- image_02
+          |   |   |   |-- 0000
+          |   |   |   |-- ...
+          |-- |-- testing
+          |-- label_02
+          |   |-- 0000.txt
+          |   |-- ...
+          |-- data_tracking_calib
+          |-- label_02_val_half
+          |   |-- 0000.txt
+          |   |-- ...
+          |-- label_02_train_half
+          |   |-- 0000.txt
+          |   |-- ...
+          `-- annotations
+              |-- tracking_train.json
+              |-- tracking_test.json
+              |-- tracking_train_half.json
+              `-- tracking_val_half.json
+```
+  
+###  nuScenes Tracking 
+- Download the dataset from [nuScenes website](https://www.nuscenes.org/download). You only need to download the "Keyframe blobs", and only need the images data. You also need to download the maps and all metadata.
+- Unzip, rename, and place  the data as below. You will need to merge folders from different zip files.
+```
+ ${DEFT_ROOT}
+  |-- data
+  `-- |-- nuscenes
+      `-- |-- v1.0-trainval
+          |   |-- samples
+          |   |   |-- CAM_BACK
+          |   |   |   | -- xxx.jpg
+          |   |   |-- CAM_BACK_LEFT
+          |   |   |-- CAM_BACK_RIGHT
+          |   |   |-- CAM_FRONT
+          |   |   |-- CAM_FRONT_LEFT
+          |   |   |-- CAM_FRONT_RIGHT
+          |-- |-- maps
+          `-- |-- v1.0-trainval_meta
+```
+- Run the dataset preprocessing script.
+```
+cd src/tools/
+convert_nuScenes.py
+```
+
+
+## References
+Please cite the corresponding References if you use the datasets.
+
+~~~
+  @article{MOT16,
+    title = {{MOT}16: {A} Benchmark for Multi-Object Tracking},
+    shorttitle = {MOT16},
+    url = {http://arxiv.org/abs/1603.00831},
+    journal = {arXiv:1603.00831 [cs]},
+    author = {Milan, A. and Leal-Taix\'{e}, L. and Reid, I. and Roth, S. and Schindler, K.},
+    month = mar,
+    year = {2016},
+    note = {arXiv: 1603.00831},
+    keywords = {Computer Science - Computer Vision and Pattern Recognition}
+  }
+
+
+  @INPROCEEDINGS{Geiger2012CVPR,
+    author = {Andreas Geiger and Philip Lenz and Raquel Urtasun},
+    title = {Are we ready for Autonomous Driving? The KITTI Vision Benchmark Suite},
+    booktitle = {CVPR},
+    year = {2012}
+  }
+
+
+  @inproceedings{nuscenes2019,
+  title={{nuScenes}: A multimodal dataset for autonomous driving},
+  author={Holger Caesar and Varun Bankiti and Alex H. Lang and Sourabh Vora and Venice Erin Liong and Qiang Xu and Anush Krishnan and Yu Pan and Giancarlo Baldan and Oscar Beijbom},
+  booktitle={CVPR},
+  year={2020}
+  }
+~~~
