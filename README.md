@@ -206,3 +206,7 @@ Please cite the corresponding References if you use the datasets.
   year={2020}
   }
 ~~~
+## Training and Evaluation Experiments
+Scripts for training and evaluating DEFT on MOT, KITTI and nuScenes are available in the [experiments](https://github.com/MedChaabane/DEFT/tree/main/experiments) folder. The outputs videos and results (same as submission format) will be on the folders $dataset_name$_videos and $dataset_name$_results. 
+## Acknowledgement
+A large portion of code is borrowed from [xingyizhou/CenterTrack](https://github.com/xingyizhou/CenterTracktoward), [shijieS/SST](https://github.com/shijieS/SST) and [Zhongdao/Towards-Realtime-MOT](https://github.com/Zhongdao/Towards-Realtime-MOT/tree/master/tracker), many thanks to their wonderful work!
