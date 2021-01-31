@@ -14,6 +14,31 @@ Most modern multiple object tracking (MOT) systems follow the tracking-by-detect
 <img src="examples/nuscenes2.gif" width="400"/>   
 <img src="examples/nuscenes3.gif" width="400"/>   
 
+## Tracking performance
+### Results on MOT challenge test set 
+| Dataset    |  MOTA | MOTP | IDF1 | IDS |
+|--------------|-----------|--------|-------|--------|
+|MOT16 (Public)    | 61.7 | 78.3 | 60.2 | 768 | 
+|MOT16 (Private)       | 68.03 | 78.71 | 66.39 | 925 | 
+|MOT17 (Public)    | 60.4 | 78.1 | 59.7 | 2581 |
+|MOT17 (Private)       | 66.6 | 78.83 | 65.42 | 2823 | 
+
+The results are obtained on the [MOT challenge](https://motchallenge.net) evaluation server.
+
+### Results on 2D Vehicle Tracking on KITTI test set
+| Dataset    |  MOTA | MOTP | MT | ML |IDS|
+|--------------|-----------|--------|-------|--------|--------|
+|KITTI    | 88.95 | 84.55 | 84.77 | 1.85 | 343|
+
+Tthe results are obtained on the [KITTI challenge](http://www.cvlibs.net/datasets/kitti/eval_tracking.php) evaluation server.
+
+### Results on 3D Tracking on nuScenes test set
+| Dataset    |  AMOTA | MOTAR | MOTA |
+|--------------|-----------|--------|-------|
+|nuScenes    | 17.7 | 48.4 | 15.6 | 
+
+Tthe results are obtained on the [nuSCenes challenge](https://www.nuscenes.org/tracking?externalData=no&mapData=no&modalities=Camera) evaluation server.
+
 ## Installation
 * Clone this repo, and run the following commands.
 * create a new conda environment and activate the environment.
@@ -41,30 +66,7 @@ cd DCNv2
 ```
 * Download the [pretrained models](https://drive.google.com/drive/folders/1dlVoV-4fMYlttdj2ba0unn6WX-nxaC48?usp=sharing) and move them to src/models/ . 
 
-## Tracking performance
-### Results on MOT challenge test set 
-| Dataset    |  MOTA | MOTP | IDF1 | IDS |
-|--------------|-----------|--------|-------|--------|
-|MOT16 (Public)    | 61.7 | 78.3 | 60.2 | 768 | 
-|MOT16 (Private)       | 68.03 | 78.71 | 66.39 | 925 | 
-|MOT17 (Public)    | 60.4 | 78.1 | 59.7 | 2581 |
-|MOT17 (Private)       | 66.6 | 78.83 | 65.42 | 2823 | 
 
-The results are obtained on the [MOT challenge](https://motchallenge.net) evaluation server.
-
-### Results on 2D Vehicle Tracking on KITTI test set
-| Dataset    |  MOTA | MOTP | MT | ML |IDS|
-|--------------|-----------|--------|-------|--------|--------|
-|KITTI    | 88.95 | 84.55 | 84.77 | 1.85 | 343|
-
-Tthe results are obtained on the [KITTI challenge](http://www.cvlibs.net/datasets/kitti/eval_tracking.php) evaluation server.
-
-### Results on 3D Tracking on nuScenes test set
-| Dataset    |  AMOTA | MOTAR | MOTA |
-|--------------|-----------|--------|-------|
-|nuScenes    | 17.7 | 48.4 | 15.6 | 
-
-Tthe results are obtained on the [nuSCenes challenge](https://www.nuscenes.org/tracking?externalData=no&mapData=no&modalities=Camera) evaluation server.
 
 ## Datsets Preparation
 We use similar datasets preparation like in [CenterTrack framework](https://github.com/xingyizhou/CenterTrack/)
