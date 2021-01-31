@@ -37,7 +37,7 @@ Tthe results are obtained on the [KITTI challenge](http://www.cvlibs.net/dataset
 |--------------|-----------|--------|-------|
 |nuScenes    | 17.7 | 48.4 | 15.6 | 
 
-Tthe results are obtained on the [nuSCenes challenge](https://www.nuscenes.org/tracking?externalData=no&mapData=no&modalities=Camera) evaluation server.
+Tthe results are obtained on the [nuScenes challenge](https://www.nuscenes.org/tracking?externalData=no&mapData=no&modalities=Camera) evaluation server.
 
 ## Installation
 * Clone this repo, and run the following commands.
