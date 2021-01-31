@@ -12,7 +12,7 @@ Most modern multiple object tracking (MOT) systems follow the tracking-by-detect
 <img src="examples/kitti.gif" width="400"/>   
 <img src="examples/nuscenes1.gif" width="400"/>   
 <img src="examples/nuscenes2.gif" width="400"/>   
-<img src="examples/nuscenes3..gif" width="400"/>   
+<img src="examples/nuscenes3.gif" width="400"/>   
 
 ## Installation
 * Clone this repo, and run the following commands.
