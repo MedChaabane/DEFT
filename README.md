@@ -1,6 +1,19 @@
 # DEFT
 
 DEFT: Detection Embeddings for Tracking
+![](DEFT_Diagram.png)
+
+> [**DEFT: Detection Embeddings for Tracking**](https://arxiv.org/abs/2102.02267),            
+> Mohamed Chaabane, Peter Zhang, J. Ross Beveridge, Stephen O'Hara  
+> *arXiv technical report ([arXiv 2102.02267](http://arxiv.org/abs/2102.02267))*  
+
+
+    @article{Chaabane2021deft,
+      title={DEFT: Detection Embeddings for Tracking},
+      author={Chaabane, Mohamed and Zhang, Peter and Beveridge, Ross and O'Hara, Stephen},
+      journal={arXiv preprint arXiv:2102.02267},
+      year={2021}
+    }
 
 
 Contact: [chaabane@colostate.edu](mailto:chaabane@colostate.edu). Any questions or discussion are welcome! 
