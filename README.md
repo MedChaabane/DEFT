@@ -56,7 +56,7 @@ Tthe results are obtained on the [nuScenes challenge](https://www.nuscenes.org/t
 * Clone this repo, and run the following commands.
 * create a new conda environment and activate the environment.
 ```
-git clone git@github.com:MedChaabane/DEFT.git
+# clone DEFT repository 
 cd DEFT
 conda create -y -n DEFT python=3.7
 conda activate DEFT
