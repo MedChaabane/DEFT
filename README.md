@@ -58,7 +58,6 @@ Tthe results are obtained on the [nuScenes challenge](https://www.nuscenes.org/t
 ```
 #  clone DEFT repository 
 cd DEFT
-# Install conda envirment from environment.yml
 conda env create --file environment.yml
 conda activate DEFT
 ```
