@@ -56,19 +56,19 @@ Tthe results are obtained on the [nuScenes challenge](https://www.nuscenes.org/t
 * Clone this repo, and run the following commands.
 * create a new conda environment and activate the environment.
 ```
-# clone DEFT repository 
+#  clone DEFT repository 
 cd DEFT
-conda create -y -n DEFT python=3.7
+# Install conda envirment from environment.yml
+conda env create --file environment.yml
 conda activate DEFT
 ```
-* Install PyTorch and the dependencies.
+* Install the dependencies.
 ```
-conda install -y pytorch==1.2.0 torchvision==0.4.0 cudatoolkit=10.0 -c pytorch
 pip install -r requirements.txt  
 ```
 * Install [COCOAPI](https://github.com/cocodataset/cocoapi):
 ```
-pip install cython; pip install -U 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
+pip install -U 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
 ```
 * Compile [DCNv2](https://github.com/CharlesShang/DCNv2)
 ```
