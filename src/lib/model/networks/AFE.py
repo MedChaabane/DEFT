@@ -72,16 +72,6 @@ class AFE_module(nn.Module):
         self.false_constant = 1.0
 
     def forward(self, sources_pre, sources_next, l_pre, l_next):
-        """
-        the sst net forward stream
-        :param x_pre:  the previous image, (1, 3, 900, 900) FT
-        :param x_next: the next image,  (1, 3, 900, 900) FT
-        :param l_pre: the previous box center, (1, 60, 1, 1, 2) FT
-        :param l_next: the next box center, (1, 60, 1, 1, 2) FT
-        :param valid_pre: the previous box mask, (1, 1, 61) BT
-        :param valid_next: the next box mask, (1, 1, 61) BT
-        :return: the similarity matrix
-        """
 
         x_pre = self.forward_selector_stacker1(sources_pre, l_pre, self.selector)
         x_next = self.forward_selector_stacker1(sources_next, l_next, self.selector)
