@@ -98,19 +98,13 @@ sh get_mot_17.sh
           |   |    |--- img1
           |   |    |--- gt
           |   |    |   |--- gt.txt
-          |   |    |   |--- gt_train_half.txt
-          |   |    |   |--- gt_val_half.txt
           |   |    |--- det
           |   |    |   |--- det.txt
-          |   |    |   |--- det_train_half.txt
-          |   |    |   |--- det_val_half.txt
           |   |--- ...
           |--- test
           |   |--- MOT17-01-FRCNN
           |---|--- ...
           `---| annotations
-              |--- train_half.json
-              |--- val_half.json
               |--- train.json
               `--- test.json
 ```
@@ -155,17 +149,9 @@ sh get_kitti_tracking.sh
           |   |-- 0000.txt
           |   |-- ...
           |-- data_tracking_calib
-          |-- label_02_val_half
-          |   |-- 0000.txt
-          |   |-- ...
-          |-- label_02_train_half
-          |   |-- 0000.txt
-          |   |-- ...
           `-- annotations
               |-- tracking_train.json
               |-- tracking_test.json
-              |-- tracking_train_half.json
-              `-- tracking_val_half.json
 ```
   
 ###  nuScenes Tracking 
