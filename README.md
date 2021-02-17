@@ -28,6 +28,12 @@ Most modern multiple object tracking (MOT) systems follow the tracking-by-detect
 <img src="examples/nuscenes3.gif" width="600"/>   
 
 ## Tracking performance
+### Results on 3D Tracking on nuScenes test set
+| Dataset    |  AMOTA | MOTAR | MOTA |
+|--------------|-----------|--------|-------|
+|nuScenes    | 17.7 | 48.4 | 15.6 | 
+
+The results are obtained on the [nuScenes challenge](https://www.nuscenes.org/tracking?externalData=no&mapData=no&modalities=Camera) evaluation server.
 ### Results on MOT challenge test set 
 | Dataset    |  MOTA | MOTP | IDF1 | IDS |
 |--------------|-----------|--------|-------|--------|
@@ -43,14 +49,7 @@ The results are obtained on the [MOT challenge](https://motchallenge.net) evalua
 |--------------|-----------|--------|-------|--------|--------|
 |KITTI    | 88.95 | 84.55 | 84.77 | 1.85 | 343|
 
-Tthe results are obtained on the [KITTI challenge](http://www.cvlibs.net/datasets/kitti/eval_tracking.php) evaluation server.
-
-### Results on 3D Tracking on nuScenes test set
-| Dataset    |  AMOTA | MOTAR | MOTA |
-|--------------|-----------|--------|-------|
-|nuScenes    | 17.7 | 48.4 | 15.6 | 
-
-Tthe results are obtained on the [nuScenes challenge](https://www.nuscenes.org/tracking?externalData=no&mapData=no&modalities=Camera) evaluation server.
+The results are obtained on the [KITTI challenge](http://www.cvlibs.net/datasets/kitti/eval_tracking.php) evaluation server.
 
 ## Installation
 * Clone this repo, and run the following commands.
@@ -82,6 +81,32 @@ cd DCNv2
 
 ## Datsets Preparation
 We use similar datasets preparation like in [CenterTrack framework](https://github.com/xingyizhou/CenterTrack/)
+
+###  nuScenes Tracking 
+- Download the dataset from [nuScenes website](https://www.nuscenes.org/download). You only need to download the "Keyframe blobs", and only need the images data. You also need to download the maps and all metadata.
+- Unzip, rename, and place  the data as below. You will need to merge folders from different zip files.
+```
+ ${DEFT_ROOT}
+  |-- data
+  `-- |-- nuscenes
+      `-- |-- v1.0-trainval
+          |   |-- samples
+          |   |   |-- CAM_BACK
+          |   |   |   | -- xxx.jpg
+          |   |   |-- CAM_BACK_LEFT
+          |   |   |-- CAM_BACK_RIGHT
+          |   |   |-- CAM_FRONT
+          |   |   |-- CAM_FRONT_LEFT
+          |   |   |-- CAM_FRONT_RIGHT
+          |-- |-- maps
+          `-- |-- v1.0-trainval_meta
+```
+- Run the dataset preprocessing script.
+```
+cd src/tools/
+convert_nuScenes.py
+```
+
 ###  MOT 2017 
 - Run the dataset preprocessing script.
 ```
@@ -153,31 +178,7 @@ sh get_kitti_tracking.sh
               |-- tracking_train.json
               |-- tracking_test.json
 ```
-  
-###  nuScenes Tracking 
-- Download the dataset from [nuScenes website](https://www.nuscenes.org/download). You only need to download the "Keyframe blobs", and only need the images data. You also need to download the maps and all metadata.
-- Unzip, rename, and place  the data as below. You will need to merge folders from different zip files.
-```
- ${DEFT_ROOT}
-  |-- data
-  `-- |-- nuscenes
-      `-- |-- v1.0-trainval
-          |   |-- samples
-          |   |   |-- CAM_BACK
-          |   |   |   | -- xxx.jpg
-          |   |   |-- CAM_BACK_LEFT
-          |   |   |-- CAM_BACK_RIGHT
-          |   |   |-- CAM_FRONT
-          |   |   |-- CAM_FRONT_LEFT
-          |   |   |-- CAM_FRONT_RIGHT
-          |-- |-- maps
-          `-- |-- v1.0-trainval_meta
-```
-- Run the dataset preprocessing script.
-```
-cd src/tools/
-convert_nuScenes.py
-```
+ 
 
 
 ## References
