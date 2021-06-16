@@ -3,11 +3,8 @@ from __future__ import division
 from __future__ import print_function
 import os.path as osp
 import sys
-
 import _init_paths
-
 import os
-
 import torch
 import torch.utils.data
 from opts import opts
@@ -17,7 +14,6 @@ from logger import Logger
 from dataset.dataset_factory import get_dataset
 from trainer import Trainer
 import warnings
-
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 
