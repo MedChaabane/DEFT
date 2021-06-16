@@ -165,7 +165,7 @@ class ModleWithLoss(torch.nn.Module):
             x, batch["labels"], batch["current_indexes"], batch["next_indexes"]
         )
         loss_stats["matching"] = loss_matching
-        loss_stats["tot"] = self.s_det * loss_stats["tot"] + self.s_id * loss_matching
+        loss_stats["tot"] = torch.exp(-self.s_det)  * loss_stats["tot"] + torch.exp(-self.s_id) * loss_matching + (self.s_det + self.s_id)
 
         return outputs[-1], loss_stats["tot"], loss_stats
 
