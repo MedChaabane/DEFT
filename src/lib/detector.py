@@ -45,6 +45,7 @@ NUSCENES_TRACKING_NAMES = [
     "trailer",
     "truck",
 ]
+
 nuscenes_class_name = [
     "car",
     "truck",
